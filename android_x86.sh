@@ -61,7 +61,7 @@ v8_enable_pointer_compression=false
 '
 ninja -C out.gn/x86.release -t clean
 ninja -C out.gn/x86.release wee8
-third_party/android_ndk/toolchains/x86-4.9/prebuilt/linux-x86/i686-linux-android/bin/strip -g -S -d --strip-debug --verbose out.gn/x86.release/obj/libwee8.a
+third_party/android_ndk/toolchains/x86-4.9/prebuilt/linux-x86_64/i686-linux-android/bin/strip -g -S -d --strip-debug --verbose out.gn/x86.release/obj/libwee8.a
 
 node $GITHUB_WORKSPACE/genBlobHeader.js "android x86" out.gn/x86.release/snapshot_blob.bin
 
