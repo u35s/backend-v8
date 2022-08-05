@@ -43,7 +43,7 @@ echo "=====[ add ArrayBuffer_New_Without_Stl ]====="
 node $GITHUB_WORKSPACE/add_arraybuffer_new_without_stl.js .
 
 echo "=====[ Building V8 ]====="
-python ./tools/dev/v8gen.py x86.release -vv -- '
+python ./tools/dev/v8gen.py ia32.release -vv -- '
 target_os = "android"
 target_cpu = "x86"
 is_debug = false
@@ -59,14 +59,14 @@ use_custom_libcxx=false
 use_custom_libcxx_for_host=true
 v8_enable_pointer_compression=false
 '
-ninja -C out.gn/x86.release -t clean
-ninja -C out.gn/x86.release wee8
+ninja -C out.gn/ia32.release -t clean
+ninja -C out.gn/ia32.release wee8
 find ./third_party/android_ndk/ -name strip
-third_party/android_ndk/toolchains/x86-4.9/prebuilt/linux-x86_64/i686-linux-android/bin/strip -g -S -d --strip-debug --verbose out.gn/x86.release/obj/libwee8.a
+third_party/android_ndk/toolchains/x86-4.9/prebuilt/linux-x86_64/i686-linux-android/bin/strip -g -S -d --strip-debug --verbose out.gn/ia32.release/obj/libwee8.a
 
-node $GITHUB_WORKSPACE/genBlobHeader.js "android x86" out.gn/x86.release/snapshot_blob.bin
+node $GITHUB_WORKSPACE/genBlobHeader.js "android x86" out.gn/ia32.release/snapshot_blob.bin
 
 mkdir -p output/v8/Lib/Android/x86
-cp out.gn/x86.release/obj/libwee8.a output/v8/Lib/Android/x86/
+cp out.gn/ia32.release/obj/libwee8.a output/v8/Lib/Android/x86/
 mkdir -p output/v8/Inc/Blob/Android/x86
 cp SnapshotBlob.h output/v8/Inc/Blob/Android/x86/
